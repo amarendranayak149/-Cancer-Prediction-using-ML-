@@ -61,29 +61,23 @@ def train_model(X_train, y_train, preprocess, model_name):
     pipeline.fit(X_train, y_train)
     return pipeline
 
-# Custom Styling
+# Custom Styling for Center Alignment
 st.markdown("""
     <style>
         .stApp {background-color: #121212; color: #FFFFFF;}
         .title {color: #FFD700; text-align: center; font-size: 45px; font-weight: bold; text-shadow: 2px 2px 4px #000000;}
         .prediction {font-size: 30px; font-weight: bold; color: #E74C3C; text-align: center;}
         .safe {font-size: 30px; font-weight: bold; color: #1DB954; text-align: center;}
-        .alert-box {
-            background-color: #ffcccc;
-            border-left: 5px solid #cc0000;
-            padding: 15px;
-            font-size: 20px;
-            color: #cc0000;
-            font-weight: bold;
-            text-align: center;
-        }
+        .center {display: flex; justify-content: center;}
     </style>
 """, unsafe_allow_html=True)
 
-# App Title with Enhanced Styling
-st.image("innomatics_logo.png", width=350)
+# Centered Logo and Title
+st.markdown('<div class="center">', unsafe_allow_html=True)
+st.image("innomatics-footer-logo.png", use_container_width=True)
 st.markdown('<h1 class="title">🎗️ Cancer Prediction 🎗️</h1>', unsafe_allow_html=True)
 st.markdown('<p style="text-align:center; font-size:22px; color:#555;">An intelligent system for early cancer detection using machine learning.</p>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Load and Preprocess Data
 df = load_data()
@@ -91,7 +85,8 @@ df = load_data()
 
 # Model Selection with Dropdown
 model_name = st.selectbox("🧠 Choose a Machine Learning Model", [
-    "Decision Tree", "SVM", "Logistic Regression", "KNN"
+     "🌳 Decision Tree", "💠 SVM", "📈 Logistic Regression", "👥 KNN"
+
 ])
 
 # Train and Evaluate Model
@@ -102,7 +97,7 @@ if st.button("🚀 Train & Evaluate Model", key="train_button_unique"):
         st.session_state['trained_model'] = model
         st.success(f"✅ Model trained successfully with an accuracy of **{accuracy:.2f}**! 🎯")
 
-# Prediction Section with Custom Styling
+# Prediction Section with Center Alignment
 st.markdown('<h2 style="color: #D32F2F; text-align: center; font-size: 30px;">🔍 Make a Prediction</h2>', unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
@@ -133,7 +128,6 @@ input_data = [[
     exercise_dict[exercise_frequency], gender_dict[gender], family_history_dict[family_history]
 ]]
 
-# Prediction Button
 if st.button("🔍 Predict Cancer Presence", key="predict_button"):
     if 'trained_model' in st.session_state:
         model = st.session_state['trained_model']
@@ -142,8 +136,8 @@ if st.button("🔍 Predict Cancer Presence", key="predict_button"):
         prediction = model.named_steps['classifier'].predict(input_transformed)
         
         if prediction[0] == 1:
-            st.markdown('<div class="alert-box">⚠️ Urgent Alert! Cancer Detected! <br> Please Consult a Doctor Immediately! 🏥</div>', unsafe_allow_html=True)
+            st.markdown('<p class="prediction">⚠️ Cancer Detected! Please Consult a Doctor! 🩺</p>', unsafe_allow_html=True)
         else:
             st.markdown('<p class="safe">✅ No Cancer Detected! Stay Healthy! 🏥</p>', unsafe_allow_html=True)
     else:
-        st.error("❌ Please train a model first!")   
+        st.error("❌ Please train a model first!")

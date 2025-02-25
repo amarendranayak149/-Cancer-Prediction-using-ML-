@@ -41,7 +41,7 @@ An exploratory data analysis (EDA) report is available in `eda.html`, which prov
 The machine learning model is trained using scikit-learn and stored in `cancer_pl.pkl`. Predictions are generated using the trained model when new data is input into the Streamlit interface.
 
 ## Dataset
-The dataset used for training is available as `cancer_prediction_data.csv`. It contains various diagnostic features used to classify tumors.
+The dataset used for training is available as `cancer_prediction_data (2).csv`. It contains various diagnostic features used to classify tumors.
 
 ## File Structure
 ```
@@ -67,3 +67,6 @@ This project is for educational purposes and does not have a specific license.
 ## Author
 [Amarendra Nayak](https://github.com/your-github-profile)
 
+## Contact
+- **Phone:** +91-7008631814
+- **Email:** toamarendranayak@gmail.com
